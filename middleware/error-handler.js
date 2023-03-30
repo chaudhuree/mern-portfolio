@@ -28,7 +28,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     //with Object.keys(err.keyValue) it will show like this "email" 
     customError.msg = `Duplicate value entered for ${Object.keys(
       err.keyValue
-    )} field, please choose another value`
+    )} field, ${Object.values(err.keyValue)} already exists.please choose another value`
     customError.statusCode = 400
   }
   //when the id synxat does not match what the mongoose is looking for
@@ -41,7 +41,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
  
   return res.status(customError.statusCode).json({ msg: customError.msg }) //ref: 2
   // fn
-   // return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err }) //ref: 3
+  //  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err }) //ref: 3
    //for defining custom error first comment the upper return(ref:2) then uncomment the lower return(ref:3).
    //then observe the error and define own custom error
    //after defining custom error comment ref"3" and uncomment ref"2"
